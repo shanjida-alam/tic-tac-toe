@@ -1,0 +1,84 @@
+:root {
+  --bg-light:    #F5F7FA;
+  --card-bg:     #FFFFFF;
+  --border:      #DDD;
+  --accent:      #2196F3;
+  --accent-dark: #1976D2;
+  --win-human:   #C8E6C9; /* light green */
+  --win-computer:#FFCDD2; /* light red */
+  --win-draw:    #FFE0B2; /* light amber */
+  --font:        'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --text:        #333;
+}
+
+.history-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  font-family: var(--font);
+  color: var(--text);
+}
+
+.history-container h2 {
+  margin-bottom: 16px;
+  color: var(--accent-dark);
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.history-table thead {
+  background: var(--accent);
+  color: #fff;
+}
+
+.history-table tbody tr:nth-child(odd) {
+  background: #fafafa;
+}
+
+.history-table tbody tr:hover {
+  background: #f1f1f1;
+}
+
+.move {
+  display: inline-block;
+  margin-right: 8px;
+  font-family: monospace;
+}
+
+.win-human {
+  background: var(--win-human);
+}
+
+.win-computer {
+  background: var(--win-computer);
+}
+
+.win-draw {
+  background: var(--win-draw);
+}

@@ -1,6 +1,6 @@
-// client/src/components/History.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './History.css';
 
 export default function History() {
   const [games, setGames] = useState([]);
@@ -11,33 +11,54 @@ export default function History() {
       .catch(console.error);
   }, []);
 
-  if (!games.length) return <p>Loading history…</p>;
+  if (!games.length) {
+    return (
+      <div className="history-container">
+        <h2>Game History</h2>
+        <p className="loading">Loading history…</p>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="history-container">
       <h2>Game History</h2>
-      <table border="1" cellPadding="8" style={{ borderCollapse:'collapse' }}>
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Symbol</th>
-            <th>Moves</th>
-            <th>Winner</th>
-          </tr>
-        </thead>
-        <tbody>
-          {games.map(g => (
-            <tr key={g._id}>
-              <td>{g.playerName}</td>
-              <td>{g.humanSymbol} vs {g.computerSymbol}</td>
-              <td>
-                {g.moves.map(m => `${m.player[0]}(${m.symbol}@${m.index})`).join(', ')}
-              </td>
-              <td>{g.winner}</td>
+      <div className="table-wrapper">
+        <table className="history-table">
+          <thead>
+            <tr>
+              <th>#</th>                       
+              <th>Player</th>
+              <th>Symbol</th>
+              <th>Moves</th>
+              <th>Winner</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {games.map((g, i) => (
+              <tr key={g._id}>
+                <td>{i + 1}</td>               
+                <td>{g.playerName}</td>
+                <td>{g.humanSymbol} vs {g.computerSymbol}</td>
+                <td>
+                  {g.moves.map((m, idx) =>
+                    <span key={idx} className="move">
+                      {m.player[0]}({m.symbol}@{m.index})
+                    </span>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
+                </td>
+                <td className={
+                    g.winner === 'human'    ? 'win-human' :
+                    g.winner === 'computer' ? 'win-computer' :
+                                               'win-draw'
+                  }>
+                  {g.winner}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
